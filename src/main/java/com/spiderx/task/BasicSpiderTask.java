@@ -20,7 +20,10 @@ public class BasicSpiderTask {
 
     private String url;
 
+    @SerializedName("is_list_task")
     private Boolean isListTask = false;
+
+    String s = "//*[@id=\"wgt-ask\"]/h1/span";
 
     @SerializedName("rule_type")
     private RuleType ruleType = RuleType.DEFAULT;
