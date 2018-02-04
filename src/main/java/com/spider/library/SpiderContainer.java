@@ -6,6 +6,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Spider 容器
+ * 用于以后对Spider的单机集中管理
+ */
 public class SpiderContainer {
     private static final Map<String, Spider> spiders = new ConcurrentHashMap<>();
 

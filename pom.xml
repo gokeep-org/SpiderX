@@ -199,6 +199,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--web容器-->
         <dependency>
@@ -242,14 +248,24 @@
             <groupId>us.codecraft</groupId>
             <artifactId>webmagic-extension</artifactId>
             <version>${webmagic.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--Htmlunit-->
         <!-- https://mvnrepository.com/artifact/net.sourceforge.htmlunit/htmlunit -->
-        <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
-            <artifactId>htmlunit</artifactId>
-            <version>2.29</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>net.sourceforge.htmlunit</groupId>-->
+            <!--<artifactId>htmlunit</artifactId>-->
+            <!--<version>2.29</version>-->
+        <!--</dependency>-->
         <!--Test-->
         <dependency>
             <groupId>junit</groupId>
