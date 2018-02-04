@@ -1,5 +1,5 @@
 package com.spider.task;
 
-public class SpiderTask {
+public class SpiderTask extends BasicSpiderTask{
 
 }

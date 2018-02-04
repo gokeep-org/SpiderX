@@ -1,7 +1,8 @@
 package com.spider;
 
+import com.spider.pipline.TargetEnum;
 import com.spider.spider.SpiderManager;
-import org.junit.After;
+import com.spider.task.SpiderTask;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -24,7 +25,16 @@ public class SpiderManagerTest {
                 .addUrl("https://github.com/code4craft")
                 .run();
     }
-    @After
+
+    @Test
+    public void testEnableDefaultTask(){
+        SpiderTask task = new SpiderTask();
+        task.setUrl("https://github.com/code4craft");
+        task.setSpiderName("test");
+        task.setTarget(TargetEnum.ES);
+        SpiderManager.generate().enableDefaultSpider(task);
+    }
+//    @After
     public void destory(){
         spiderManager.stop();
     }

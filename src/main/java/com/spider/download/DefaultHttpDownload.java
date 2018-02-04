@@ -8,6 +8,5 @@ import us.codecraft.webmagic.downloader.HttpClientDownloader;
  * 2： 动态页面生成的下载
  */
 public class DefaultHttpDownload extends HttpClientDownloader{
-    public DefaultHttpDownload() {
-    }
+
 }

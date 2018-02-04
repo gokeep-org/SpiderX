@@ -1,5 +1,13 @@
 package com.spider.spider;
 
+import com.spider.config.SpiderConfig;
+import com.spider.config.TargetName;
+import com.spider.download.DefaultHttpDownload;
+import com.spider.exception.SpiderException;
+import com.spider.library.SpiderContainer;
+import com.spider.pipline.*;
+import com.spider.process.CommonTaskProcessor;
+import com.spider.task.SpiderTask;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -9,6 +17,7 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.downloader.Downloader;
 import us.codecraft.webmagic.pipeline.Pipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
+import us.codecraft.webmagic.scheduler.PriorityScheduler;
 import us.codecraft.webmagic.scheduler.Scheduler;
 
 import java.util.List;
@@ -254,6 +263,23 @@ public class SpiderManager {
         return this.spider;
     }
 
+    private void buildSpiderManagerPiplineBySpiderTask(SpiderManager spiderManager, SpiderTask task){
+        if (task.getTarget().getName().equals(TargetName.ES)){
+            spiderManager.addPipeline(new EsPipeline());
+        }
+        if (task.getTarget().getName().equals(TargetName.MONGODB)){
+            spiderManager.addPipeline(new MongodbPipeline());
+        }
+        if (task.getTarget().getName().equals(TargetName.MYSQL)){
+            spiderManager.addPipeline(new MysqlPipeline());
+        }
+        if (task.getTarget().getName().equals(TargetName.REDIS)){
+            spiderManager.addPipeline(new RedisPipeline());
+        }
+        spiderManager.addPipeline(new QueuePipeline());
+        spiderManager.addPipeline(new ServerPipeline());
+        spiderManager.addPipeline(new TaskPipline());
+    }
     /**
      * 外部自定义的spider对象注入
      *
@@ -261,5 +287,24 @@ public class SpiderManager {
      */
     public void setSpider(Spider spider) {
         this.spider = spider;
+    }
+
+    public void enableDefaultSpider(SpiderTask task){
+        if (Objects.isNull(task)){
+            return;
+        }
+        this.setProcessor(new CommonTaskProcessor(task))
+                .setDownloader(new DefaultHttpDownload())
+                .addUrl(task.getUrl());
+        buildSpiderManagerPiplineBySpiderTask(this, task);
+        setThreadSize(SpiderConfig.DEFAULT_THREAD_SIZE);
+        setEmptySleepTime(SpiderConfig.DEFAULT_EMPTY_TIME);
+        setSchedule(new PriorityScheduler());
+        try {
+            SpiderContainer.getSpiders().put(task.getSpiderName(), this.get());
+            SpiderContainer.getSpiderByName(task.getSpiderName()).run();
+        }catch (SpiderException e){
+            logger.error("enable default spider is fail, case is {}", e.getMessage());
+        }
     }
 }
