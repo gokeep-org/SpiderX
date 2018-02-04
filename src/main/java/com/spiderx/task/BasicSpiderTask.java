@@ -1,6 +1,7 @@
 package com.spiderx.task;
 
 import com.google.gson.annotations.SerializedName;
+import com.spiderx.config.RuleType;
 import com.spiderx.pipline.TargetEnum;
 
 import java.util.Map;
@@ -21,13 +22,13 @@ public class BasicSpiderTask {
     private Boolean isListTask = false;
 
     @SerializedName("rule_type")
-    private String ruleType;
+    private RuleType ruleType;
 
     @SerializedName("list_rule")
-    private Map<String, Object> listRule;
+    private String listRule;
 
     @SerializedName("content_rule")
-    private Map<String, Object> contentRule;
+    private Map<String, String> contentRule;
 
     @SerializedName("next_link_rule")
     private String nextLinkRule;
@@ -74,27 +75,27 @@ public class BasicSpiderTask {
         this.url = url;
     }
 
-    public String getRuleType() {
+    public RuleType getRuleType() {
         return ruleType;
     }
 
-    public void setRuleType(String ruleType) {
+    public void setRuleType(RuleType ruleType) {
         this.ruleType = ruleType;
     }
 
-    public Map<String, Object> getListRule() {
+    public String getListRule() {
         return listRule;
     }
 
-    public void setListRule(Map<String, Object> listRule) {
+    public void setListRule(String listRule) {
         this.listRule = listRule;
     }
 
-    public Map<String, Object> getContentRule() {
+    public Map<String, String> getContentRule() {
         return contentRule;
     }
 
-    public void setContentRule(Map<String, Object> contentRule) {
+    public void setContentRule(Map<String, String> contentRule) {
         this.contentRule = contentRule;
     }
 

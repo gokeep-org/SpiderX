@@ -1,13 +1,16 @@
 package com.spiderx.process;
 
+import com.spiderx.config.PageKey;
 import com.spiderx.config.SpiderConfig;
 import com.spiderx.task.SpiderTask;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
+import us.codecraft.webmagic.selector.Html;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class CommonTaskProcessor implements Processor {
@@ -24,9 +27,9 @@ public class CommonTaskProcessor implements Processor {
     @Override
     public void process(Page page) {
         if (this.task.getListTask()) {
-            processListTask(page);
+            processList(page);
         } else {
-            processContentTask(page);
+            processContent(page);
         }
     }
 
@@ -51,43 +54,32 @@ public class CommonTaskProcessor implements Processor {
     /**
      * 处理列表任务
      */
-    private void processListTask(Page page) {
-        Map<String, Object> listRules = this.task.getListRule();
-        List<String> urls = new ArrayList<>();
-        listRules.entrySet().stream().forEach(rule -> {
-            String url = page.getHtml().links().xpath(rule.getValue().toString()).toString();
-            urls.add(url);
-        });
-        page.putField("content_link_url", urls);
-        // 添加下一页的url
-        page.addTargetRequest(page.getHtml().links().xpath(this.task.getNextLinkRule().trim()).toString());
-        // 解析列表url
-        // 发送到队列
-        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/[\\w\\-]+/[\\w\\-]+)").all());
-        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/[\\w\\-])").all());
-        page.putField("author", page.getUrl().regex("https://github\\.com/(\\w+)/.*").toString());
-        page.putField("name", page.getHtml().xpath("//h1[@class='entry-title public']/strong/a/text()").toString());
-        if (page.getResultItems().get("name") == null) {
-            //skip this page
+    private void processList(Page page) {
+        Html doc = page.getHtml();
+        if (Objects.isNull(doc)) {
+            return;
+        }
+        List<String> contentLink = LinkParser.build(doc, this.task).parseLink();
+        String nextListLink = LinkParser.build(doc, this.task).parseNextLink();
+        if (CollectionUtils.isEmpty(contentLink) || StringUtils.isEmpty(nextListLink)) {
             page.setSkip(true);
         }
-        page.putField("readme", page.getHtml().xpath("//div[@id='readme']/tidyText()"));
+        page.putField(PageKey.CONTENT_LINKS, contentLink);
+        page.addTargetRequest(nextListLink);
     }
 
     /**
      * 处理详情任务
      */
-    public void processContentTask(Page page) {
-        // 解析内容url
-        // 发送到队列
-        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/[\\w\\-]+/[\\w\\-]+)").all());
-        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/[\\w\\-])").all());
-        page.putField("author", page.getUrl().regex("https://github\\.com/(\\w+)/.*").toString());
-        page.putField("name", page.getHtml().xpath("//h1[@class='entry-title public']/strong/a/text()").toString());
-        if (page.getResultItems().get("name") == null) {
-            //skip this page
+    public void processContent(Page page) {
+        Html doc = page.getHtml();
+        if (Objects.isNull(doc)) {
+            return;
+        }
+        CommonContent commonContent = ContentParser.build(doc, this.task).parseContent();
+        if (Objects.isNull(commonContent) || MapUtils.isEmpty(commonContent.getResult())) {
             page.setSkip(true);
         }
-        page.putField("readme", page.getHtml().xpath("//div[@id='readme']/tidyText()"));
+        page.putField(PageKey.CONTENT_RESULT, commonContent);
     }
 }
