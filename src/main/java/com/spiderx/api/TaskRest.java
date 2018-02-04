@@ -1,9 +1,11 @@
 package com.spiderx.api;
 
+import com.spiderx.core.action.factory.TaskActionFactory;
+import com.spiderx.core.domain.output.task.TaskOperatiobOutput;
 import com.spiderx.library.SpiderContainer;
-import com.spiderx.pipline.TargetEnum;
-import com.spiderx.spider.SpiderManager;
 import com.spiderx.task.SpiderTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import us.codecraft.webmagic.Spider;
 
 import javax.ws.rs.*;
@@ -14,15 +16,15 @@ import java.util.Map;
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 public class TaskRest {
-
+    private static final Logger logger = LoggerFactory.getLogger(TaskRest.class);
+    /**
+     * 该接口主要针对以Channel为级别的任务添加，初始任务
+     * @param task
+     * @return
+     */
     @POST
-    public Map addSpiderTask(@QueryParam("url") String url, @QueryParam("name") String name){
-        SpiderTask task = new SpiderTask();
-        task.setUrl(url);
-        task.setSpiderName(name);
-        task.setTarget(TargetEnum.ES);
-        SpiderManager.generate().enableDefaultSpider(task);
-        return null;
+    public TaskOperatiobOutput addSpiderTask(SpiderTask task) throws Exception{
+        return TaskActionFactory.getAddTaskAction(task).execute();
     }
 
     @GET

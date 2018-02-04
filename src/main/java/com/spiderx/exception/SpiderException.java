@@ -15,6 +15,12 @@ public class SpiderException extends RuntimeException{
      */
     private String uuid = UUID.randomUUID().toString();
 
+    public SpiderException(){}
+
+    public SpiderException(String message) {
+        super(message);
+    }
+
     public String getCode() {
         return code;
     }

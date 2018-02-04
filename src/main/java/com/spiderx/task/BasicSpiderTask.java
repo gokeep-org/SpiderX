@@ -5,13 +5,14 @@ import com.spiderx.config.RuleType;
 import com.spiderx.pipline.TargetEnum;
 
 import java.util.Map;
+import java.util.UUID;
 
 public class BasicSpiderTask {
     @SerializedName("spider_name")
     private String spiderName;
 
     @SerializedName("spider_uuid")
-    private String spiderUuid;
+    private String spiderUuid = UUID.randomUUID().toString();
 
     private String site;
 
@@ -22,7 +23,7 @@ public class BasicSpiderTask {
     private Boolean isListTask = false;
 
     @SerializedName("rule_type")
-    private RuleType ruleType;
+    private RuleType ruleType = RuleType.DEFAULT;
 
     @SerializedName("list_rule")
     private String listRule;
@@ -33,7 +34,7 @@ public class BasicSpiderTask {
     @SerializedName("next_link_rule")
     private String nextLinkRule;
 
-    private TargetEnum target;
+    private TargetEnum target = TargetEnum.ES;
 
     public String getSpiderName() {
         return spiderName;
