@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: appTest
+  output:
+    ansi:
+      enabled: always
+  http:
+    encoding:
+      charset: utf-8
+      force: true
+  profiles:
+    active: dev
+server:
+  connection-timeout: 60000

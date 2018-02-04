@@ -1,0 +1,6 @@
+server:
+  port: 20001
+logging:
+  level:
+    com:
+      app: off
