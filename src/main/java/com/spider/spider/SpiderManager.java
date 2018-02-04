@@ -88,11 +88,12 @@ public class SpiderManager {
      * @param url
      * @return
      */
-    public Spider addUrl(String url){
+    public SpiderManager addUrl(String url){
         if (StringUtils.isEmpty(url)){
-            return this.spider;
+            return this;
         }
-        return this.spider.addUrl(url);
+        this.spider.addUrl(url);
+        return this;
     }
 
     /**
