@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 用于构建spider的类
+ * 用于构建spider的核心类
  * 这个是一个单例的形式，但是不能让它成为真正的单例
  * 每个采集点的spider应当由独立的采集域来创建
  * 使用的Template:
