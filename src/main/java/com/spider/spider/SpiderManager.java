@@ -302,7 +302,7 @@ public class SpiderManager {
         setSchedule(new PriorityScheduler());
         try {
             SpiderContainer.getSpiders().put(task.getSpiderName(), this.get());
-            SpiderContainer.getSpiderByName(task.getSpiderName()).run();
+            SpiderContainer.getSpiderByName(task.getSpiderName()).runAsync();
         }catch (SpiderException e){
             logger.error("enable default spider is fail, case is {}", e.getMessage());
         }

@@ -11,20 +11,22 @@ import java.util.concurrent.ConcurrentHashMap;
  * 用于以后对Spider的单机集中管理
  */
 public class SpiderContainer {
+    private SpiderContainer(){}
+
     private static final Map<String, Spider> spiders = new ConcurrentHashMap<>();
 
     public static Spider getSpiderByName(String name){
         return spiders.get(name);
     }
 
-    public void stopSpiderByName(String name){
+    public static void stopSpiderByName(String name){
         if (Objects.isNull(spiders.get(name))){
             return;
         }
         spiders.get(name).stop();
     }
 
-    public static Map<String, Spider> getSpiders() {
+    public  static Map<String, Spider> getSpiders() {
         return spiders;
     }
 }

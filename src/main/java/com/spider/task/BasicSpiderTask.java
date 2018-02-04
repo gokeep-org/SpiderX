@@ -18,6 +18,8 @@ public class BasicSpiderTask {
 
     private String url;
 
+    private Boolean isListTask = false;
+
     @SerializedName("rule_type")
     private String ruleType;
 
@@ -26,6 +28,9 @@ public class BasicSpiderTask {
 
     @SerializedName("content_rule")
     private Map<String, Object> contentRule;
+
+    @SerializedName("next_link_rule")
+    private String nextLinkRule;
 
     private TargetEnum target;
 
@@ -99,5 +104,21 @@ public class BasicSpiderTask {
 
     public void setTarget(TargetEnum target) {
         this.target = target;
+    }
+
+    public Boolean getListTask() {
+        return isListTask;
+    }
+
+    public void setListTask(Boolean listTask) {
+        isListTask = listTask;
+    }
+
+    public String getNextLinkRule() {
+        return nextLinkRule;
+    }
+
+    public void setNextLinkRule(String nextLinkRule) {
+        this.nextLinkRule = nextLinkRule;
     }
 }
