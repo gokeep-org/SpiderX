@@ -3,7 +3,7 @@ package com.spiderx.config;
 public enum RuleType {
     XPATH("xpath", 1),
     SELECTOR("selector", 2),
-    DEFAULT(XPATH.name, XPATH.code);
+    DEFAULT(SELECTOR.name, SELECTOR.code);
 
     private String name;
     private int code;

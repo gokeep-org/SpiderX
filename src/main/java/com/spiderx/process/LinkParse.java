@@ -1,8 +1,7 @@
 package com.spiderx.process;
 
 import com.spiderx.config.RuleType;
-import us.codecraft.webmagic.selector.CssSelector;
-import us.codecraft.webmagic.selector.Html;
+import us.codecraft.webmagic.selector.*;
 
 import java.util.List;
 
@@ -20,10 +19,10 @@ public interface LinkParse extends Parse{
      */
     default List<String> getByRule(Html doc, String rule, RuleType ruleType){
         if (ruleType.getName().equals(RuleType.XPATH.getName())) {
-            return doc.links().xpath(rule).all();
+            return doc.xpath(rule).links().all();
         }else if (ruleType.getName().equals(RuleType.SELECTOR.getName())){
-            return doc.links().select(new CssSelector(rule)).all();
+            return doc.css(rule).links().all();
         }
-        return doc.links().xpath(rule).all();
+        return doc.xpath(rule).links().all();
     }
 }

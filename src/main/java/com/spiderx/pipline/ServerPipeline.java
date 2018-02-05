@@ -11,6 +11,6 @@ public class ServerPipeline implements Pipeline{
     @Override
     public void process(ResultItems resultItems, Task task) {
         List<String> contentLinks = (List<String>) resultItems.getAll().get(PageKey.CONTENT_LINKS);
-
+        System.out.println(contentLinks);
     }
 }

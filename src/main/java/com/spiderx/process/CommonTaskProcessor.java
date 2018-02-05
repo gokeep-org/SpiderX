@@ -3,9 +3,7 @@ package com.spiderx.process;
 import com.spiderx.config.PageKey;
 import com.spiderx.config.SpiderConfig;
 import com.spiderx.task.SpiderTask;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang3.StringUtils;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.selector.Html;
@@ -61,9 +59,7 @@ public class CommonTaskProcessor implements Processor {
         }
         List<String> contentLink = LinkParser.build(doc, this.task).parseLink();
         String nextListLink = LinkParser.build(doc, this.task).parseNextLink();
-        if (CollectionUtils.isEmpty(contentLink) || StringUtils.isEmpty(nextListLink)) {
-            page.setSkip(true);
-        }
+        // TODO: 这里需要校验采集的最总落点，从而结束采集任务
         page.putField(PageKey.CONTENT_LINKS, contentLink);
         page.addTargetRequest(nextListLink);
     }
