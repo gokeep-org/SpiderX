@@ -39,6 +39,7 @@
         <jolokia.version>1.3.5</jolokia.version>
         <requests.version>1.0.0</requests.version>
         <webmagic.version>0.7.3</webmagic.version>
+        <jest.version>5.3.3</jest.version>
     </properties>
 
     <!--依赖管理-->
@@ -258,6 +259,13 @@
                     <artifactId>slf4j-api</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <!--Elasticsearch java client-->
+        <!-- https://mvnrepository.com/artifact/io.searchbox/jest -->
+        <dependency>
+            <groupId>io.searchbox</groupId>
+            <artifactId>jest</artifactId>
+            <version>${jest.version}</version>
         </dependency>
         <!--Htmlunit-->
         <!-- https://mvnrepository.com/artifact/net.sourceforge.htmlunit/htmlunit -->
