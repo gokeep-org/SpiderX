@@ -4,10 +4,11 @@ import com.google.gson.annotations.SerializedName;
 import com.spiderx.config.RuleType;
 import com.spiderx.pipline.TargetEnum;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.UUID;
 
-public class BasicSpiderTask {
+public class BasicSpiderTask implements Serializable {
     @SerializedName("spider_name")
     private String spiderName;
 

@@ -5,10 +5,14 @@ import com.spiderx.spider.SpiderManager;
 import com.spiderx.task.SpiderTask;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import us.codecraft.webmagic.processor.example.GithubRepoPageProcessor;
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringApplicationConfiguration(Bootstracp.class)
 public class SpiderManagerTest {
     private SpiderManager spiderManager;
     private static final Logger logger = LoggerFactory.getLogger(SpiderManagerTest.class);

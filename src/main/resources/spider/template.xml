@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<spider name = "template-spider"
+        spider-type = "simple">
+
+    <!--采集环境-->
+    <settings>
+        <!--是否启用-->
+        <enable>true</enable>
+        <!--是否遵守reboot协议-->
+        <reboot>false</reboot>
+        <!--匹配规则类型-->
+        <rule-type>xpath</rule-type>
+    </settings>
+
+    <!--站点频道信息-->
+    <site-info>
+        <name>百度</name>
+        <channel>新闻</channel>
+        <domain>http://news.baidu.com</domain>
+        <start-url>http://news.baidu.com</start-url>
+    </site-info>
+
+    <rule>
+        <!--列表页任务描述-->
+        <list rule = "/html/body/div/li/a"/>
+        <!--详情页的任务描述-->
+        <content>
+            <field name="title">/html/body/title</field>
+            <field name="date">/html/body/time[0]->li->a</field>
+            <field name="auther">/html/body/time[0]->li->auther</field>
+        </content>
+    </rule>
+
+</spider>
