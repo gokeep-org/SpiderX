@@ -13,3 +13,10 @@
 ## 框架流程
 
 ![SpiderX流程](https://raw.githubusercontent.com/smartning/Resource/master/base.png)
+
+
+## 方案选择
+### 1：Simple type模式
+### 1：Simple Cache模式
+### 1：Distributed cache模式
+### 4: Distributed plugin模式

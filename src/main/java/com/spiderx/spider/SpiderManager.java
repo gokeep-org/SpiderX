@@ -29,11 +29,11 @@ import java.util.Objects;
  * 每个采集点的spider应当由独立的采集域来创建
  * 使用的Template:
  * -----------------------------------code------
-   spiderManager.generate()
-     .setProcessor(new GithubRepoPageProcessor())
-     .setThreadSize(5)
-     .addUrl("https://github.com/code4craft")
-     .run();
+ * spiderManager.generate()
+ * .setProcessor(new GithubRepoPageProcessor())
+ * .setThreadSize(5)
+ * .addUrl("https://github.com/code4craft")
+ * .run();
  * ----------------------------------------------
  */
 
@@ -85,7 +85,6 @@ public class SpiderManager {
             S scheduler,
             List<T> pipelines,
             int emptyTime,
-
             int threadSize
     ) {
         return setProcessor(processor)
@@ -263,23 +262,24 @@ public class SpiderManager {
         return this.spider;
     }
 
-    private void buildSpiderManagerPiplineBySpiderTask(SpiderManager spiderManager, SpiderTask task){
-        if (task.getTarget().getName().equals(TargetName.ES)){
+    private void buildSpiderManagerPiplineBySpiderTask(SpiderManager spiderManager, SpiderTask task) {
+        if (task.getTarget().getName().equals(TargetName.ES)) {
             spiderManager.addPipeline(new EsPipeline());
         }
-        if (task.getTarget().getName().equals(TargetName.MONGODB)){
+        if (task.getTarget().getName().equals(TargetName.MONGODB)) {
             spiderManager.addPipeline(new MongodbPipeline());
         }
-        if (task.getTarget().getName().equals(TargetName.MYSQL)){
+        if (task.getTarget().getName().equals(TargetName.MYSQL)) {
             spiderManager.addPipeline(new MysqlPipeline());
         }
-        if (task.getTarget().getName().equals(TargetName.REDIS)){
+        if (task.getTarget().getName().equals(TargetName.REDIS)) {
             spiderManager.addPipeline(new RedisPipeline());
         }
         spiderManager.addPipeline(new QueuePipeline());
         spiderManager.addPipeline(new ServerPipeline());
         spiderManager.addPipeline(new TaskPipline());
     }
+
     /**
      * 外部自定义的spider对象注入
      *
@@ -289,8 +289,8 @@ public class SpiderManager {
         this.spider = spider;
     }
 
-    public void enableDefaultSpider(SpiderTask task){
-        if (Objects.isNull(task)){
+    public void enableDefaultSpider(SpiderTask task) {
+        if (Objects.isNull(task)) {
             return;
         }
         this.setProcessor(new CommonTaskProcessor(task))
@@ -303,7 +303,7 @@ public class SpiderManager {
         try {
             SpiderContainer.getSpiders().put(task.getSpiderName(), this.get());
             SpiderContainer.getSpiderByName(task.getSpiderName()).runAsync();
-        }catch (SpiderException e){
+        } catch (SpiderException e) {
             logger.error("enable default spider is fail, case is {}", e.getMessage());
         }
     }
