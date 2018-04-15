@@ -1,7 +1,7 @@
 package com.spiderx.api;
 
-import com.spiderx.core.action.factory.TestActionFactory;
-import com.spiderx.core.domain.output.test.TestInfoOutput;
+import com.spiderx.web.action.factory.TestActionFactory;
+import com.spiderx.web.domain.output.test.TestInfoOutput;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +21,12 @@ public class TestRest {
         return TestActionFactory.getTestInfoAction(flag).execute();
     }
 
+    /**
+     * 该接口用于使用git自动化部署的接口，无关于任何业务操作
+     * 当git
+     * @param body
+     * @return
+     */
     @POST
     @Path("/hook")
     public String hookTest(Map<String, Object> body){

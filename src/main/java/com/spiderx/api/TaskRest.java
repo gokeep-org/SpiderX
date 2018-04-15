@@ -1,7 +1,7 @@
 package com.spiderx.api;
 
-import com.spiderx.core.action.factory.TaskActionFactory;
-import com.spiderx.core.domain.output.task.TaskOperatiobOutput;
+import com.spiderx.web.action.factory.TaskActionFactory;
+import com.spiderx.web.domain.output.task.TaskOperatiobOutput;
 import com.spiderx.library.SpiderContainer;
 import com.spiderx.task.SpiderTask;
 import org.slf4j.Logger;
