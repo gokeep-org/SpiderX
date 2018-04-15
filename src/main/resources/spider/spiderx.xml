@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--此文件是所有spiderx的所有启动配置文件， enable-all为所有spider配置文件启动的开关-->
+
+<enable all = "true">
+    <module>template.xml</module>
+</enable>

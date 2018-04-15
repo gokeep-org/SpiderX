@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!--此配置文件主要用于非完全架构下的运行模式配置文件，以应对简单快速要求的需求场景-->
 <spider name = "template-spider"
         spider-type = "simple">
 
-    <!--采集环境-->
+    <!--采集环境核心配置-->
     <settings>
         <!--是否启用-->
         <enable>true</enable>
@@ -11,6 +11,8 @@
         <reboot>false</reboot>
         <!--匹配规则类型-->
         <rule-type>xpath</rule-type>
+        <!--是否使用开启web与服务发现的支持-->
+        <web-enable>true</web-enable>
     </settings>
 
     <!--站点频道信息-->
@@ -19,6 +21,9 @@
         <channel>新闻</channel>
         <domain>http://news.baidu.com</domain>
         <start-url>http://news.baidu.com</start-url>
+        <end-url>http://news.baidu.com/cd8cds878cds.php</end-url>
+        <retty-times>5</retty-times>
+        <update-type>elasticsearch</update-type>
     </site-info>
 
     <rule>
@@ -32,4 +37,16 @@
         </content>
     </rule>
 
+    <download>
+        <type>default</type>
+    </download>
+
+    <upload>
+        <type>es</type>
+        <address>http://localhost://9200</address>
+        <params-list>
+            <param name = "url">http://www.example.com</param>
+            <auth name = "auth">0</auth>
+        </params-list>
+    </upload>
 </spider>
