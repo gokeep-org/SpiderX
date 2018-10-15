@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <!--总体配置-->
+    <node>1</node>
+    <name>Test</name>
+    <type>1</type>
+    <desc>simple web site spider</desc>
+
+    <resources>
+        <!--连接资源文件-->
+        <res type="default:xml">spider_baidu.xml</res>
+        <res type="default:xml">spider_baidu.xml</res>
+        <res type="default:xml">spider_baidu.xml</res>
+        <res type="default:xml">spider_baidu.xml</res>
+    </resources>
+</root>

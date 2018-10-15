@@ -13,8 +13,8 @@
 
     <modules>
         <!--<module>OauthServer</module>-->
-        <module>DeployServer</module>
-        <module>CoreServer</module>
+        <module>Core</module>
+        <module>Deploy</module>
         <module>Web</module>
     </modules>
 
@@ -40,7 +40,7 @@
         <javaee-api.version>7.0</javaee-api.version>
         <jest.version>2.0.1-SNAPSHOT</jest.version>
         <jolokia.version>1.3.5</jolokia.version>
-        <requests.version>1.0.0</requests.version>
+        <requests.version>1.0.1</requests.version>
         <webmagic.version>0.7.3</webmagic.version>
         <jest.version>5.3.3</jest.version>
         <hazelcast.version>3.9.2</hazelcast.version>
@@ -317,6 +317,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot-maven-plugin.version}</version>
+                <configuration>
+                    <mainClass>com.spiderx.Bootstracp</mainClass>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>

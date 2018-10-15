@@ -26,7 +26,7 @@ public class SpiderManagerTest {
         spiderManager
                 .setProcessor(new GithubRepoPageProcessor())
                 .setThreadSize(5)
-                .addUrl("https://github.com/code4craft")
+                .addUrl("http://github.com/code4craft")
                 .run();
     }
 

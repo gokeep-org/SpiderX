@@ -1,0 +1,9 @@
+{
+  "node_id": 1,
+  "type": 1,
+  "desc": "This is a simple test",
+  "resources":[
+    "1.json",
+    "2.json"
+  ]
+}
